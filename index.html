@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jorge Pardos Blasco — Computational Chemist</title>
+  <meta name="description" content="Portfolio of Jorge Pardos Blasco, computational chemistry PhD candidate — molecular simulation, QM/MM, and personal software projects.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    :root{
+      --bg: oklch(0.16 0.02 250);
+      --bg-soft: oklch(0.185 0.022 250);
+      --elev: oklch(0.205 0.022 250);
+      --elev-2: oklch(0.245 0.026 250);
+      --border: oklch(0.34 0.03 250 / 0.7);
+      --border-soft: oklch(0.34 0.03 250 / 0.35);
+      --text: oklch(0.96 0.006 250);
+      --dim: oklch(0.745 0.02 250);
+      --mute: oklch(0.56 0.02 250);
+      --accent: oklch(0.78 0.125 189);
+      --accent-soft: oklch(0.78 0.125 189 / 0.12);
+      --accent-line: oklch(0.78 0.125 189 / 0.35);
+      --amber: oklch(0.78 0.135 55);
+      --amber-soft: oklch(0.78 0.135 55 / 0.14);
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);}
+    body{
+      font-family:'IBM Plex Sans', system-ui, sans-serif;
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      scroll-behavior:smooth;
+    }
+    h1,h2,h3{font-family:'Space Grotesk', system-ui, sans-serif; margin:0; letter-spacing:-0.01em;}
+    a{color:var(--accent); text-decoration:none;}
+    a:hover{color:var(--amber);}
+    .mono{font-family:'IBM Plex Mono', ui-monospace, monospace;}
+    .eyebrow{
+      font-family:'IBM Plex Mono', monospace;
+      font-size:13px;
+      letter-spacing:0.14em;
+      color:var(--accent);
+      text-transform:uppercase;
+      display:flex; align-items:center; gap:10px;
+    }
+    .eyebrow .num{color:var(--mute);}
+    .section{
+      max-width:1120px;
+      margin:0 auto;
+      padding:96px 32px;
+      position:relative;
+    }
+    .section-tight{padding-top:64px; padding-bottom:64px;}
+    .chip{
+      font-family:'IBM Plex Mono', monospace;
+      font-size:12.5px;
+      color:var(--dim);
+      background:var(--elev-2);
+      border:1px solid var(--border-soft);
+      border-radius:6px;
+      padding:6px 11px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      line-height:1.2;
+    }
+    .btn{
+      font-family:'IBM Plex Mono', monospace;
+      font-size:14px;
+      font-weight:500;
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:13px 22px;
+      border-radius:8px;
+      border:1px solid var(--border);
+      transition:border-color .15s ease, background .15s ease, transform .15s ease;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:var(--accent);
+      color:oklch(0.16 0.02 250);
+      border-color:var(--accent);
+    }
+    .btn-primary:hover{background:oklch(0.84 0.12 189); color:oklch(0.16 0.02 250); transform:translateY(-1px);}
+    .btn-ghost{
+      background:oklch(1 0 0 / 0.02);
+      color:var(--text);
+    }
+    .btn-ghost:hover{border-color:var(--accent-line); color:var(--text); background:oklch(1 0 0 / 0.045);}
+    .card{
+      background:var(--elev);
+      border:1px solid var(--border-soft);
+      border-radius:14px;
+      padding:28px;
+    }
+    .card:hover{border-color:var(--border);}
+    .hairline{height:1px; background:linear-gradient(90deg, var(--border-soft), transparent);}
+    ::selection{background:var(--accent-soft); color:var(--text);}
+
+    .nav-link{
+      font-family:'IBM Plex Mono', monospace;
+      font-size:13px;
+      color:var(--dim);
+      padding:6px 2px;
+      border-bottom:1px solid transparent;
+    }
+    .nav-link:hover{color:var(--text); border-color:var(--accent-line);}
+
+    .hobby-chip{
+      display:flex; align-items:center; gap:10px;
+      background:var(--elev);
+      border:1px solid var(--border-soft);
+      border-radius:11px;
+      padding:12px 16px;
+    }
+    .hobby-chip svg{flex:none;}
+    .hobby-chip:hover{border-color:var(--accent-line);}
+
+    .proj-tag{
+      font-family:'IBM Plex Mono', monospace;
+      font-size:11.5px;
+      color:var(--accent);
+      background:var(--accent-soft);
+      border-radius:5px;
+      padding:4px 8px;
+      letter-spacing:0.02em;
+    }
+
+    .timeline-item{position:relative; padding-left:34px; padding-bottom:44px; border-left:1px solid var(--border-soft);}
+    .timeline-item:last-child{border-color:transparent; padding-bottom:0;}
+    .timeline-dot{
+      position:absolute; left:-6.5px; top:4px;
+      width:12px; height:12px; border-radius:50%;
+      background:var(--bg); border:2px solid var(--accent);
+    }
+
+    .grid-auto{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:20px;
+    }
+    .grid-auto-2{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+      gap:20px;
+    }
+
+    .footer-icon{
+      width:40px; height:40px; border-radius:9px;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--border-soft);
+      color:var(--dim);
+    }
+    .footer-icon:hover{color:var(--text); border-color:var(--accent-line);}
+  </style>
+</head>
+<body>
+
+<div style="background:var(--bg); min-height:100%; overflow-x:hidden;">
+
+  <!-- NAV -->
+  <div style="position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:oklch(0.16 0.02 250 / 0.72); border-bottom:1px solid var(--border-soft);">
+    <div style="max-width:1120px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+      <a href="#top" style="display:flex; align-items:center; gap:10px;">
+        <div class="mono" style="width:34px; height:34px; border-radius:8px; background:var(--accent-soft); border:1px solid var(--accent-line); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:500; font-size:13px;">JP</div>
+        <span class="mono" style="font-size:13px; color:var(--dim);">pardos&#8203;.dev</span>
+      </a>
+      <div style="display:flex; align-items:center; gap:26px; flex-wrap:wrap;">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#publications">Publications</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="btn btn-ghost" href="mailto:jorgepardosblasco@gmail.com" style="padding:9px 16px; font-size:12.5px;">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div id="top" style="position:relative; min-height:640px; display:flex; align-items:flex-end; overflow:hidden;">
+    <img src="hero_bg.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:60% 30%;">
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, oklch(0.16 0.02 250 / 0.55) 0%, oklch(0.16 0.02 250 / 0.55) 30%, oklch(0.16 0.02 250 / 0.94) 92%, var(--bg) 100%);"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(100deg, oklch(0.16 0.02 250 / 0.75) 0%, oklch(0.16 0.02 250 / 0.15) 46%, transparent 68%);"></div>
+
+    <div style="position:relative; max-width:1120px; margin:0 auto; padding:clamp(120px, 26vw, 220px) 32px 72px; width:100%;">
+      <div class="eyebrow" style="margin-bottom:22px;">
+        <span>Computational Chemistry &times; Molecular Simulation</span>
+      </div>
+      <h1 style="font-size:clamp(38px, 6vw, 68px); font-weight:700; line-height:1.04; max-width:880px;">Jorge Pardos&nbsp;Blasco</h1>
+      <p style="font-family:'Space Grotesk', sans-serif; font-weight:500; font-size:clamp(17px, 2.1vw, 22px); color:var(--dim); max-width:640px; margin:20px 0 0; line-height:1.45;">
+        PhD candidate in computational chemistry, using quantum mechanics and molecular simulation to understand how enzymes and catalysts work &mdash; and picking up Python along the way to make sense of the results.
+      </p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:34px;">
+        <a class="btn btn-primary" href="mailto:jorgepardosblasco@gmail.com">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+          Get in touch
+        </a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/jorge-pardos-blasco-253a6a20b" target="_blank" rel="noopener">
+          LinkedIn
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
+        <div class="mono" style="display:flex; align-items:center; gap:8px; color:var(--mute); font-size:13px; padding:0 4px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Zaragoza, Spain
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="section" style="position:relative;">
+    <svg style="position:absolute; right:-40px; top:20px; opacity:0.35; pointer-events:none;" width="300" height="300" viewBox="0 0 300 300" fill="none">
+      <circle cx="230" cy="60" r="3" fill="oklch(0.78 0.125 189)"/>
+      <circle cx="270" cy="130" r="3" fill="oklch(0.78 0.125 189)"/>
+      <circle cx="190" cy="150" r="3" fill="oklch(0.78 0.135 55)"/>
+      <circle cx="250" cy="220" r="3" fill="oklch(0.78 0.125 189)"/>
+      <circle cx="150" cy="90" r="2.5" fill="oklch(0.56 0.02 250)"/>
+      <line x1="230" y1="60" x2="270" y2="130" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
+      <line x1="270" y1="130" x2="250" y2="220" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
+      <line x1="270" y1="130" x2="190" y2="150" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
+      <line x1="230" y1="60" x2="150" y2="90" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
+    </svg>
+
+    <div class="eyebrow"><span class="num">01</span><span>&mdash; About</span></div>
+    <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Chemistry first, code as a tool.</h2>
+
+    <div style="display:flex; gap:56px; margin-top:40px; flex-wrap:wrap;">
+      <div style="flex:1 1 420px; min-width:280px;">
+        <p style="font-size:17px; line-height:1.75; color:var(--dim); margin:0;">
+          I'm a computational chemist in the final stretch of a PhD in Zaragoza, where my main work is running QM/MM, molecular dynamics and metadynamics simulations to understand how enzymes and catalysts actually work &mdash; work that has looked at a cancer-linked human GTPase and a bacterial enzyme tied to antibiotic resistance. Python is the tool I reach for to get there &mdash; turning weeks of simulation output into a clear answer.
+        </p>
+        <p style="font-size:17px; line-height:1.75; color:var(--dim); margin:20px 0 0;">
+          Alongside that, I like putting together small, organized tools for my own research &mdash; the kind with a proper test suite and a README, not just a one-off script. That habit has grown into a handful of personal projects at the intersection of molecular simulation and cheminformatics &mdash; a few of which are below.
+        </p>
+
+        <div class="eyebrow" style="color:var(--dim); margin:28px 0 16px;"><span>Where I'm headed</span></div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.125 189)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="17" r="2.2"/><path d="M7.9 8.3 10.2 15M16.1 8.3 13.8 15M8.2 7h7.6"/></svg>
+            <span style="font-size:14px;">Applied ML for chemistry &amp; materials</span>
+          </div>
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.125 189)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.6" fill="oklch(0.78 0.125 189)" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg>
+            <span style="font-size:14px;">Quantum computing for simulation</span>
+          </div>
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.125 189)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c2.5 3 3.8 6 3.8 9a3.8 3.8 0 1 1-7.6 0c0-3 1.3-6 3.8-9Z"/><path d="M9 17.5c-2.5 1-4 2.5-4 4M15 17.5c2.5 1 4 2.5 4 4"/></svg>
+            <span style="font-size:14px;">Industrial R&amp;D &mdash; research that ships as a product</span>
+          </div>
+        </div>
+
+        <div class="hairline" style="margin:32px 0 28px;"></div>
+
+        <div class="eyebrow" style="color:var(--dim); margin-bottom:16px;"><span>Beyond the lab</span></div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.135 55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.5 5.5c3 3 3 10 0 13M18.5 5.5c-3 3-3 10 0 13"/></svg>
+            <span style="font-size:14px;">Basketball</span>
+          </div>
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.135 55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16"/><path d="M5 21c0-4 1-6 1-9a6 6 0 0 1 12 0c0 3 1 5 1 9"/><path d="M9 5c0-1.5.7-2.5.7-2.5M12 5c0-1.8.8-3 .8-3M15 5c0-1.5-.7-2.5-.7-2.5"/></svg>
+            <span style="font-size:14px;">Cooking</span>
+          </div>
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.135 55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 6.5-12L13 15l2.5-4.5L21 20Z"/><path d="m13 20 2-3.6"/></svg>
+            <span style="font-size:14px;">Hiking</span>
+          </div>
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.135 55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.3" cy="8.3" r="1.2" fill="oklch(0.78 0.135 55)" stroke="none"/><circle cx="15.7" cy="8.3" r="1.2" fill="oklch(0.78 0.135 55)" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="oklch(0.78 0.135 55)" stroke="none"/><circle cx="8.3" cy="15.7" r="1.2" fill="oklch(0.78 0.135 55)" stroke="none"/><circle cx="15.7" cy="15.7" r="1.2" fill="oklch(0.78 0.135 55)" stroke="none"/></svg>
+            <span style="font-size:14px;">Board games</span>
+          </div>
+          <div class="hobby-chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.135 55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 11v3M6 12.5h3"/><circle cx="15.5" cy="10.8" r="0.9" fill="oklch(0.78 0.135 55)" stroke="none"/><circle cx="17.7" cy="13" r="0.9" fill="oklch(0.78 0.135 55)" stroke="none"/></svg>
+            <span style="font-size:14px;">Video games</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:22px;">
+        <div style="position:relative; width:230px; height:288px;">
+          <div style="position:absolute; inset:0; border:1px solid var(--accent-line); border-radius:14px; transform:translate(10px,10px);"></div>
+          <img src="portrait_crop.jpg" alt="Jorge Pardos Blasco" style="position:relative; width:230px; height:288px; object-fit:cover; border-radius:14px; border:1px solid var(--border); display:block;">
+          <svg style="position:absolute; top:-9px; left:-9px;" width="20" height="20" viewBox="0 0 20 20"><path d="M0 8V0H8" stroke="oklch(0.78 0.125 189)" stroke-width="2" fill="none"/></svg>
+          <svg style="position:absolute; bottom:-9px; right:-9px;" width="20" height="20" viewBox="0 0 20 20"><path d="M20 12V20H12" stroke="oklch(0.78 0.125 189)" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div class="card" style="width:230px; padding:18px 20px;">
+          <div style="display:flex; flex-direction:column; gap:10px;" class="mono">
+            <div style="display:flex; justify-content:space-between; font-size:12.5px;"><span style="color:var(--mute);">Based in</span><span>Zaragoza, ES</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:12.5px;"><span style="color:var(--mute);">Status</span><span>PhD, final stage</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:12.5px;"><span style="color:var(--mute);">Papers</span><span>4 published</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:12.5px;"><span style="color:var(--mute);">Languages</span><span>ES &middot; EN &middot; FR</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="section section-tight">
+    <div class="eyebrow"><span class="num">02</span><span>&mdash; Skills</span></div>
+    <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Technical skills</h2>
+
+    <div class="grid-auto" style="margin-top:36px;">
+      <div class="card">
+        <h3 style="font-size:15px; color:var(--accent);" class="mono">Simulation &amp; Quantum Chemistry</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+          <span class="chip">DFT</span><span class="chip">QM/MM</span><span class="chip">QM/MM/MD</span><span class="chip">Metadynamics</span><span class="chip">Gaussian</span><span class="chip">ORCA</span><span class="chip">Q-Chem</span><span class="chip">AMBER</span><span class="chip">CP2K</span><span class="chip">ROBERT</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px; color:var(--accent);" class="mono">Programming &amp; Software</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+          <span class="chip">Python</span><span class="chip">Fortran</span><span class="chip">pytest</span><span class="chip">NumPy / SciPy</span><span class="chip">Pandas</span><span class="chip">RDKit</span><span class="chip">MDAnalysis</span><span class="chip">Git / GitHub</span><span class="chip">CLI design</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px; color:var(--accent);" class="mono">Machine Learning &amp; Data</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+          <span class="chip">Molecular property prediction</span><span class="chip">Deep-learning OCR (DECIMER, MolScribe)</span><span class="chip">Data pipelines</span><span class="chip">Visualization</span><span class="chip">Quantum computing (foundations)</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px; color:var(--accent);" class="mono">Infrastructure</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+          <span class="chip">Linux</span><span class="chip">HPC / SLURM</span><span class="chip">Version control</span><span class="chip">Automated testing</span><span class="chip">Reproducible workflows</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects" class="section section-tight">
+    <div class="eyebrow"><span class="num">03</span><span>&mdash; Projects</span></div>
+    <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Things I've built</h2>
+    <p style="color:var(--mute); font-size:15px; margin-top:12px; max-width:620px;">Personal Python side-projects that grew out of my own research &mdash; small in scope, but built with tests and documentation so someone else could actually run them.</p>
+
+    <div class="grid-auto-2" style="margin-top:36px;">
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <h3 style="font-size:19px;">PenIndex</h3>
+          <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">from my own paper</span>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
+          Interaction analyzer implementing the <em>Penetration Index</em>, a purely geometrical bonding descriptor I co-developed and published in <em>Dalton Transactions</em> (2026). Detects and classifies covalent, hydrogen-bond, van der Waals and metallophilic contacts across structures and MD trajectories.
+        </p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">A single distance stands in for energy-decomposition analyses too expensive to run at scale &mdash; useful for screening bonding character across many structures at once.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
+          <span class="proj-tag">Python</span><span class="proj-tag">MDAnalysis</span><span class="proj-tag">pytest</span><span class="proj-tag">PyMOL</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <h3 style="font-size:19px;">md-interactions</h3>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
+          Pip-installable CLI that reproducibly analyzes enzyme&ndash;substrate MD trajectories: catalytic distances/angles, hydrogen bonds, RMSD/RMSF, free-energy maps and clustering. Validates the full configuration against the topology before running a single frame, then outputs publication-ready figures and a report.
+        </p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Built to replace the one-off scripts a lab reruns by hand each time &mdash; something a colleague, not just its author, can actually pick up and run.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
+          <span class="proj-tag">Python</span><span class="proj-tag">CLI</span><span class="proj-tag">pytest</span><span class="proj-tag">Matplotlib</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <h3 style="font-size:19px;">Molecule2input</h3>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
+          End-to-end pipeline from a hand-drawn or ChemDraw-style molecule image to a ready-to-run Gaussian/ORCA input file. Combines deep-learning structure recognition (DECIMER, MolScribe) with deterministic, RDKit-based stereochemistry, charge/spin assignment and 3D embedding &mdash; plus a human verification step at the one point the pipeline is uncertain.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
+          <span class="proj-tag">Python</span><span class="proj-tag">RDKit</span><span class="proj-tag">Deep learning</span><span class="proj-tag">CLI</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <h3 style="font-size:19px;">frame_extractor</h3>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
+          A focused utility that replicates AMBER's <span class="mono">cpptraj</span> frame/trajectory extraction: centers the solute, wraps solvent across periodic boundaries, and exports any frame or range using familiar cpptraj-style indexing.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
+          <span class="proj-tag">Python</span><span class="proj-tag">MDAnalysis</span><span class="proj-tag">ParmEd</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div id="publications" class="section section-tight">
+    <div class="eyebrow"><span class="num">04</span><span>&mdash; Publications</span></div>
+    <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Publications</h2>
+
+    <div style="display:flex; flex-direction:column; margin-top:32px;">
+
+      <a href="https://doi.org/10.1021/acscatal.5c00719" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
+        <div>
+          <div style="font-size:15.5px;">Pardos, J. <em>et al.</em></div>
+          <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">ACS Catalysis &middot; 2025, 15(6), 4415&ndash;4428</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+
+      <a href="https://doi.org/10.1039/D5DT02699G" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
+        <div>
+          <div style="font-size:15.5px;">Pardos, J.; Gonzalo, J.; Merino, P.; Echeverr&iacute;a, J.</div>
+          <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">Dalton Transactions &middot; 2026, 55(9), 3967&ndash;3974</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+
+      <a href="https://doi.org/10.1021/acs.joc.4c01839" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
+        <div>
+          <div style="font-size:15.5px;">Trujillo-Sierra, J. <em>et al.</em> (incl. Pardos, J.)</div>
+          <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">Journal of Organic Chemistry &middot; 2024, 89(18), 13654&ndash;13660</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+
+      <a href="https://doi.org/10.1016/j.molstruc.2026.145493" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; color:var(--text);">
+        <div>
+          <div style="font-size:15.5px;">Sultana, S. <em>et al.</em> (incl. Pardos, J.)</div>
+          <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">Journal of Molecular Structure &middot; 2026, 1359, 145493</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div id="experience" class="section section-tight">
+    <div class="eyebrow"><span class="num">05</span><span>&mdash; Experience</span></div>
+    <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Research experience</h2>
+
+    <div style="margin-top:40px; max-width:760px;">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <h3 style="font-size:17px;">PhD Researcher &mdash; Computational Chemistry</h3>
+          <span class="mono" style="font-size:12.5px; color:var(--mute); white-space:nowrap;">2023 &ndash; Present</span>
+        </div>
+        <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:4px;">Universidad de Zaragoza</div>
+        <ul style="margin:14px 0 0; padding-left:18px; color:var(--dim); font-size:14.5px; line-height:1.75;">
+          <li>Elucidating the catalytic mechanism of EarP, a bacterial enzyme with no human counterpart that modifies elongation factor EF-P &mdash; a modification linked to virulence and antibiotic resistance in pathogens such as <em>Pseudomonas aeruginosa</em>, and studied here as a potential selective antibacterial target. Used QM/MM, molecular dynamics and metadynamics, cross-validated against experimental mutagenesis data.</li>
+          <li>Developed the Penetration Index, a geometrical bonding descriptor correlating with independently computed covalency descriptors &mdash; a cheaper proxy for bonding character than the energy-decomposition methods it was validated against; published in Dalton Transactions.</li>
+          <li>Replaced ad-hoc analysis scripts with reusable, tested Python packages and automated workflows for multiscale simulations on Linux/HPC infrastructure.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <h3 style="font-size:17px;">Erasmus Mundus MSc Researcher</h3>
+          <span class="mono" style="font-size:12.5px; color:var(--mute); white-space:nowrap;">2021 &ndash; 2023</span>
+        </div>
+        <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:4px;">Universidad de Valencia / Universidad Aut&oacute;noma de Madrid</div>
+        <ul style="margin:14px 0 0; padding-left:18px; color:var(--dim); font-size:14.5px; line-height:1.75;">
+          <li>Master's thesis: resolved a long-standing mechanistic controversy for GTP hydrolysis by RhoA &mdash; a Ras-superfamily GTPase implicated in breast, colon and lung cancers, and an active target for small-molecule inhibitor design &mdash; using QM/MM free-energy calculations.</li>
+          <li>Identified glutamine tautomerism as the rate-limiting proton-transfer step, matching the experimental rate constant and reconciling several competing mechanistic proposals from the literature; published in ACS Catalysis.</li>
+          <li>Trained in advanced electronic-structure theory and computational modelling across a competitive, multi-institution European programme (EMTCCM).</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <h3 style="font-size:17px;">BSc in Chemistry</h3>
+          <span class="mono" style="font-size:12.5px; color:var(--mute); white-space:nowrap;">2017 &ndash; 2021</span>
+        </div>
+        <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:4px;">Universidad de Zaragoza</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTACT / FOOTER -->
+  <div id="contact" class="section" style="text-align:center; padding-top:80px;">
+    <div class="eyebrow" style="justify-content:center;"><span class="num">06</span><span>&mdash; Contact</span></div>
+    <h2 style="font-size:clamp(30px,4vw,46px); font-weight:700; margin-top:16px;">Let's talk.</h2>
+    <p style="color:var(--dim); font-size:16.5px; max-width:520px; margin:16px auto 0; line-height:1.7;">
+      Open to industry roles in computational chemistry, molecular modelling and applied ML. If any of the above is a fit, I'd like to hear from you.
+    </p>
+    <div style="margin-top:32px;">
+      <a class="btn btn-primary" href="mailto:jorgepardosblasco@gmail.com" style="font-size:15px; padding:15px 26px;">
+        jorgepardosblasco@gmail.com
+      </a>
+    </div>
+
+    <div style="display:flex; gap:12px; justify-content:center; margin-top:28px;">
+      <a class="footer-icon" href="https://www.linkedin.com/in/jorge-pardos-blasco-253a6a20b" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 11v5M8 8v.01M12 16v-5M12 16v-3a2 2 0 0 1 4 0v3"/></svg>
+      </a>
+      <a class="footer-icon" href="https://github.com/JorgePardos" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 8 5 12 9 16"/><polyline points="15 8 19 12 15 16"/></svg>
+      </a>
+      <a class="footer-icon" href="mailto:jorgepardosblasco@gmail.com" aria-label="Email">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+      </a>
+    </div>
+
+    <div class="hairline" style="margin:56px 0 26px;"></div>
+    <div class="mono" style="font-size:12px; color:var(--mute); padding-bottom:40px;">Jorge Pardos Blasco &middot; Zaragoza, Spain</div>
+  </div>
+
+</div>
+</body>
+</html>
