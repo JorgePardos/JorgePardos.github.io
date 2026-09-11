@@ -93,10 +93,18 @@
       border:1px solid var(--border-soft);
       border-radius:14px;
       padding:28px;
+      transition:border-color .2s ease, transform .2s ease, box-shadow .25s ease;
     }
-    .card:hover{border-color:var(--border);}
+    .card:hover{border-color:var(--border); transform:translateY(-3px); box-shadow:0 16px 32px oklch(0.1 0.01 250 / 0.35);}
     .hairline{height:1px; background:linear-gradient(90deg, var(--border-soft), transparent);}
     ::selection{background:var(--accent-soft); color:var(--text);}
+
+    .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);}
+    .reveal.is-visible{opacity:1; transform:translateY(0);}
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1; transform:none; transition:none;}
+      .card, .hobby-chip, .timeline-dot, .pub-row{transition:none;}
+    }
 
     .nav-link{
       font-family:'IBM Plex Mono', monospace;
@@ -113,9 +121,13 @@
       border:1px solid var(--border-soft);
       border-radius:11px;
       padding:12px 16px;
+      transition:border-color .2s ease, transform .2s ease;
     }
     .hobby-chip svg{flex:none;}
-    .hobby-chip:hover{border-color:var(--accent-line);}
+    .hobby-chip:hover{border-color:var(--accent-line); transform:translateY(-2px);}
+
+    .chip{transition:border-color .2s ease, color .2s ease;}
+    .chip:hover{border-color:var(--accent-line); color:var(--text);}
 
     .proj-tag{
       font-family:'IBM Plex Mono', monospace;
@@ -133,7 +145,12 @@
       position:absolute; left:-6.5px; top:4px;
       width:12px; height:12px; border-radius:50%;
       background:var(--bg); border:2px solid var(--accent);
+      transition:box-shadow .25s ease;
     }
+    .timeline-item:hover .timeline-dot{box-shadow:0 0 0 5px var(--accent-soft);}
+
+    .pub-row{transition:background .2s ease, padding-left .2s ease;}
+    .pub-row:hover{background:oklch(1 0 0 / 0.03); padding-left:10px !important;}
 
     .grid-auto{
       display:grid;
@@ -210,29 +227,33 @@
 
   <!-- ABOUT -->
   <div id="about" class="section" style="position:relative;">
-    <svg style="position:absolute; right:-40px; top:20px; opacity:0.35; pointer-events:none;" width="300" height="300" viewBox="0 0 300 300" fill="none">
-      <circle cx="230" cy="60" r="3" fill="oklch(0.78 0.125 189)"/>
-      <circle cx="270" cy="130" r="3" fill="oklch(0.78 0.125 189)"/>
-      <circle cx="190" cy="150" r="3" fill="oklch(0.78 0.135 55)"/>
-      <circle cx="250" cy="220" r="3" fill="oklch(0.78 0.125 189)"/>
-      <circle cx="150" cy="90" r="2.5" fill="oklch(0.56 0.02 250)"/>
-      <line x1="230" y1="60" x2="270" y2="130" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
-      <line x1="270" y1="130" x2="250" y2="220" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
-      <line x1="270" y1="130" x2="190" y2="150" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
-      <line x1="230" y1="60" x2="150" y2="90" stroke="oklch(0.34 0.03 250)" stroke-width="1"/>
-    </svg>
 
     <div class="eyebrow"><span class="num">01</span><span>&mdash; About</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Chemistry first, code as a tool.</h2>
 
     <div style="display:flex; gap:56px; margin-top:40px; flex-wrap:wrap;">
       <div style="flex:1 1 420px; min-width:280px;">
-        <p style="font-size:17px; line-height:1.75; color:var(--dim); margin:0;">
-          I'm a computational chemist in the final stretch of a PhD in Zaragoza, where my main work is running QM/MM, molecular dynamics and metadynamics simulations to understand how enzymes and catalysts actually work &mdash; work that has looked at a cancer-linked human GTPase and a bacterial enzyme tied to antibiotic resistance. Python is the tool I reach for to get there &mdash; turning weeks of simulation output into a clear answer.
+        <p class="reveal" style="font-size:17px; line-height:1.75; color:var(--dim); margin:0;">
+          I'm a computational chemist in the final stretch of a PhD in Zaragoza, where my main work is running QM/MM, molecular dynamics and metadynamics simulations to understand how enzymes and catalysts actually work &mdash; and to connect a molecule's electronic structure to what it actually does, from catalytic activity to optical response. Python is the tool I reach for to get there &mdash; turning weeks of simulation output into a clear answer.
         </p>
-        <p style="font-size:17px; line-height:1.75; color:var(--dim); margin:20px 0 0;">
-          Alongside that, I like putting together small, organized tools for my own research &mdash; the kind with a proper test suite and a README, not just a one-off script. That habit has grown into a handful of personal projects at the intersection of molecular simulation and cheminformatics &mdash; a few of which are below.
+        <p class="reveal" style="font-size:17px; line-height:1.75; color:var(--dim); margin:20px 0 0;">
+          Alongside that, I like putting together small, organized tools for my own research &mdash; the kind with clear documentation and a README, not just a one-off script. That habit has grown into a handful of personal projects at the intersection of molecular simulation and cheminformatics &mdash; a few of which are below.
         </p>
+
+        <figure class="reveal" style="margin:26px 0 0; padding:20px 22px; background:var(--elev); border:1px solid var(--border-soft); border-radius:14px;">
+          <svg viewBox="0 0 340 150" role="img" aria-label="Energy diagram showing a catalyst opening a lower-energy path between the same reactants and products, compared to the taller uncatalyzed barrier" style="width:100%; max-width:420px; height:auto; display:block; color:var(--mute);">
+            <line x1="14" y1="132" x2="326" y2="132" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+            <path d="M14,116 C92,20 178,20 250,126" fill="none" stroke="currentColor" stroke-width="2" opacity="0.55"/>
+            <path d="M14,116 C92,78 178,78 250,126" fill="none" stroke="oklch(0.78 0.125 189)" stroke-width="2.5"/>
+            <circle cx="14" cy="116" r="3.5" fill="currentColor"/>
+            <circle cx="250" cy="126" r="3.5" fill="currentColor"/>
+            <text x="6" y="146" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">Reactants</text>
+            <text x="206" y="146" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">Products</text>
+            <text x="64" y="34" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)" opacity="0.8">Uncatalyzed</text>
+            <text x="66" y="72" font-family="IBM Plex Mono, monospace" font-size="11" fill="oklch(0.78 0.125 189)">Catalyzed</text>
+          </svg>
+          <figcaption style="font-size:13px; color:var(--mute); margin-top:10px; line-height:1.6;">A catalyst opens a lower-energy path between the same reactants and products &mdash; the mechanism I model computationally, from enzymes to organometallic catalysts.</figcaption>
+        </figure>
 
         <div class="eyebrow" style="color:var(--dim); margin:28px 0 16px;"><span>Where I'm headed</span></div>
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
@@ -277,7 +298,7 @@
         </div>
       </div>
 
-      <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:22px;">
+      <div class="reveal" style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:22px;">
         <div style="position:relative; width:230px; height:288px;">
           <div style="position:absolute; inset:0; border:1px solid var(--accent-line); border-radius:14px; transform:translate(10px,10px);"></div>
           <img src="portrait_crop.jpg" alt="Jorge Pardos Blasco" style="position:relative; width:230px; height:288px; object-fit:cover; border-radius:14px; border:1px solid var(--border); display:block;">
@@ -302,28 +323,22 @@
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Technical skills</h2>
 
     <div class="grid-auto" style="margin-top:36px;">
-      <div class="card">
+      <div class="card reveal">
         <h3 style="font-size:15px; color:var(--accent);" class="mono">Simulation &amp; Quantum Chemistry</h3>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
-          <span class="chip">DFT</span><span class="chip">QM/MM</span><span class="chip">QM/MM/MD</span><span class="chip">Metadynamics</span><span class="chip">Gaussian</span><span class="chip">ORCA</span><span class="chip">Q-Chem</span><span class="chip">AMBER</span><span class="chip">CP2K</span><span class="chip">ROBERT</span>
+          <span class="chip">DFT</span><span class="chip">QM/MM</span><span class="chip">QM/MM/MD</span><span class="chip">Metadynamics</span><span class="chip">ELF analysis</span><span class="chip">Gaussian</span><span class="chip">ORCA</span><span class="chip">Q-Chem</span><span class="chip">AMBER</span><span class="chip">CP2K</span><span class="chip">ROBERT</span><span class="chip">AlphaFold</span>
         </div>
       </div>
-      <div class="card">
+      <div class="card reveal" style="transition-delay:60ms;">
         <h3 style="font-size:15px; color:var(--accent);" class="mono">Programming &amp; Software</h3>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
-          <span class="chip">Python</span><span class="chip">Fortran</span><span class="chip">pytest</span><span class="chip">NumPy / SciPy</span><span class="chip">Pandas</span><span class="chip">RDKit</span><span class="chip">MDAnalysis</span><span class="chip">Git / GitHub</span><span class="chip">CLI design</span>
+          <span class="chip">Python</span><span class="chip">Fortran</span><span class="chip">NumPy / SciPy</span><span class="chip">Pandas</span><span class="chip">RDKit</span><span class="chip">MDAnalysis</span><span class="chip">Git / GitHub</span><span class="chip">CLI design</span><span class="chip">Data pipelines</span><span class="chip">Visualization</span>
         </div>
       </div>
-      <div class="card">
-        <h3 style="font-size:15px; color:var(--accent);" class="mono">Machine Learning &amp; Data</h3>
-        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
-          <span class="chip">Molecular property prediction</span><span class="chip">Deep-learning OCR (DECIMER, MolScribe)</span><span class="chip">Data pipelines</span><span class="chip">Visualization</span><span class="chip">Quantum computing (foundations)</span>
-        </div>
-      </div>
-      <div class="card">
+      <div class="card reveal" style="transition-delay:120ms;">
         <h3 style="font-size:15px; color:var(--accent);" class="mono">Infrastructure</h3>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
-          <span class="chip">Linux</span><span class="chip">HPC / SLURM</span><span class="chip">Version control</span><span class="chip">Automated testing</span><span class="chip">Reproducible workflows</span>
+          <span class="chip">Linux</span><span class="chip">HPC / SLURM</span><span class="chip">Version control</span><span class="chip">Reproducible workflows</span>
         </div>
       </div>
     </div>
@@ -333,13 +348,22 @@
   <div id="projects" class="section section-tight">
     <div class="eyebrow"><span class="num">03</span><span>&mdash; Projects</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Things I've built</h2>
-    <p style="color:var(--mute); font-size:15px; margin-top:12px; max-width:620px;">Personal Python side-projects that grew out of my own research &mdash; small in scope, but built with tests and documentation so someone else could actually run them.</p>
+    <p style="color:var(--mute); font-size:15px; margin-top:12px; max-width:620px;">Personal Python side-projects that grew out of my own research &mdash; small in scope, but documented well enough that someone else could actually run them.</p>
 
     <div class="grid-auto-2" style="margin-top:36px;">
 
-      <div class="card">
+      <div class="card reveal">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
-          <h3 style="font-size:19px;">PenIndex</h3>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <svg width="34" height="20" viewBox="0 0 60 34" role="img" aria-label="Two atoms connected by a measured interatomic distance" style="color:var(--mute); flex:none;">
+              <circle cx="10" cy="17" r="7" fill="none" stroke="oklch(0.78 0.135 55)" stroke-width="2"/>
+              <circle cx="50" cy="17" r="7" fill="none" stroke="oklch(0.78 0.135 55)" stroke-width="2"/>
+              <line x1="17" y1="17" x2="43" y2="17" stroke="currentColor" stroke-width="1.3" stroke-dasharray="3 2.5"/>
+              <line x1="17" y1="10" x2="17" y2="24" stroke="currentColor" stroke-width="1"/>
+              <line x1="43" y1="10" x2="43" y2="24" stroke="currentColor" stroke-width="1"/>
+            </svg>
+            <h3 style="font-size:19px;">PenIndex</h3>
+          </div>
           <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">from my own paper</span>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
@@ -347,11 +371,11 @@
         </p>
         <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">A single distance stands in for energy-decomposition analyses too expensive to run at scale &mdash; useful for screening bonding character across many structures at once.</p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
-          <span class="proj-tag">Python</span><span class="proj-tag">MDAnalysis</span><span class="proj-tag">pytest</span><span class="proj-tag">PyMOL</span>
+          <span class="proj-tag">Python</span><span class="proj-tag">MDAnalysis</span><span class="proj-tag">PyMOL</span>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal" style="transition-delay:60ms;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <h3 style="font-size:19px;">md-interactions</h3>
         </div>
@@ -360,23 +384,23 @@
         </p>
         <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Built to replace the one-off scripts a lab reruns by hand each time &mdash; something a colleague, not just its author, can actually pick up and run.</p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
-          <span class="proj-tag">Python</span><span class="proj-tag">CLI</span><span class="proj-tag">pytest</span><span class="proj-tag">Matplotlib</span>
+          <span class="proj-tag">Python</span><span class="proj-tag">CLI</span><span class="proj-tag">Matplotlib</span>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal" style="transition-delay:120ms;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <h3 style="font-size:19px;">Molecule2input</h3>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
-          End-to-end pipeline from a hand-drawn or ChemDraw-style molecule image to a ready-to-run Gaussian/ORCA input file. Combines deep-learning structure recognition (DECIMER, MolScribe) with deterministic, RDKit-based stereochemistry, charge/spin assignment and 3D embedding &mdash; plus a human verification step at the one point the pipeline is uncertain.
+          End-to-end pipeline from a hand-drawn or ChemDraw-style molecule image to a ready-to-run Gaussian/ORCA input file. Wraps an existing image-to-structure recognition model (DECIMER, MolScribe) as the front end, then applies deterministic, RDKit-based logic &mdash; stereochemistry, charge/spin assignment, 3D embedding &mdash; plus a human verification step at the one point the pipeline is uncertain.
         </p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
-          <span class="proj-tag">Python</span><span class="proj-tag">RDKit</span><span class="proj-tag">Deep learning</span><span class="proj-tag">CLI</span>
+          <span class="proj-tag">Python</span><span class="proj-tag">RDKit</span><span class="proj-tag">CLI</span>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal" style="transition-delay:180ms;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <h3 style="font-size:19px;">frame_extractor</h3>
         </div>
@@ -396,9 +420,23 @@
     <div class="eyebrow"><span class="num">04</span><span>&mdash; Publications</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Publications</h2>
 
-    <div style="display:flex; flex-direction:column; margin-top:32px;">
+    <div class="reveal" style="margin-top:28px;">
+      <svg viewBox="0 0 300 54" role="img" aria-label="Timeline of four publications from 2024 to 2026: one in 2024, one in 2025, and two in 2026" style="width:100%; max-width:320px; height:auto; display:block; color:var(--mute);">
+        <line x1="10" y1="34" x2="290" y2="34" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+        <circle cx="40" cy="34" r="5" fill="oklch(0.78 0.125 189)"><title>J. Org. Chem., 2024</title></circle>
+        <circle cx="150" cy="34" r="5" fill="oklch(0.78 0.125 189)"><title>ACS Catalysis, 2025</title></circle>
+        <circle cx="260" cy="34" r="5" fill="oklch(0.78 0.125 189)"><title>Dalton Transactions, 2026</title></circle>
+        <circle cx="260" cy="17" r="5" fill="oklch(0.78 0.125 189)"><title>Journal of Molecular Structure, 2026</title></circle>
+        <line x1="260" y1="22" x2="260" y2="29" stroke="oklch(0.78 0.125 189)" stroke-width="1.5"/>
+        <text x="40" y="50" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">2024</text>
+        <text x="150" y="50" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">2025</text>
+        <text x="260" y="50" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">2026</text>
+      </svg>
+    </div>
 
-      <a href="https://doi.org/10.1021/acscatal.5c00719" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
+    <div style="display:flex; flex-direction:column; margin-top:12px;">
+
+      <a class="pub-row reveal" href="https://doi.org/10.1021/acscatal.5c00719" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
         <div>
           <div style="font-size:15.5px;">Pardos, J. <em>et al.</em></div>
           <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">ACS Catalysis &middot; 2025, 15(6), 4415&ndash;4428</div>
@@ -406,7 +444,7 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
       </a>
 
-      <a href="https://doi.org/10.1039/D5DT02699G" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
+      <a class="pub-row reveal" href="https://doi.org/10.1039/D5DT02699G" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
         <div>
           <div style="font-size:15.5px;">Pardos, J.; Gonzalo, J.; Merino, P.; Echeverr&iacute;a, J.</div>
           <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">Dalton Transactions &middot; 2026, 55(9), 3967&ndash;3974</div>
@@ -414,7 +452,7 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
       </a>
 
-      <a href="https://doi.org/10.1021/acs.joc.4c01839" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
+      <a class="pub-row reveal" href="https://doi.org/10.1021/acs.joc.4c01839" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; border-bottom:1px solid var(--border-soft); color:var(--text);">
         <div>
           <div style="font-size:15.5px;">Trujillo-Sierra, J. <em>et al.</em> (incl. Pardos, J.)</div>
           <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">Journal of Organic Chemistry &middot; 2024, 89(18), 13654&ndash;13660</div>
@@ -422,7 +460,7 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
       </a>
 
-      <a href="https://doi.org/10.1016/j.molstruc.2026.145493" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; color:var(--text);">
+      <a class="pub-row reveal" href="https://doi.org/10.1016/j.molstruc.2026.145493" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; color:var(--text);">
         <div>
           <div style="font-size:15.5px;">Sultana, S. <em>et al.</em> (incl. Pardos, J.)</div>
           <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:5px;">Journal of Molecular Structure &middot; 2026, 1359, 145493</div>
@@ -430,6 +468,30 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--mute);"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
       </a>
 
+    </div>
+
+    <div class="card reveal" style="margin-top:28px; display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
+      <figure style="margin:0; flex:none;">
+        <svg viewBox="0 0 120 110" role="img" aria-label="Energy level diagram of a filled HOMO and an empty LUMO separated by a small gap" style="width:110px; height:100px; display:block; color:var(--mute);">
+          <line x1="15" y1="85" x2="70" y2="85" stroke="oklch(0.78 0.125 189)" stroke-width="3"/>
+          <circle cx="34" cy="85" r="3" fill="oklch(0.78 0.125 189)"/>
+          <circle cx="51" cy="85" r="3" fill="oklch(0.78 0.125 189)"/>
+          <line x1="15" y1="28" x2="70" y2="28" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+          <line x1="90" y1="82" x2="90" y2="31" stroke="currentColor" stroke-width="1"/>
+          <path d="M90,82 L86,74 M90,82 L94,74" stroke="currentColor" stroke-width="1" fill="none"/>
+          <path d="M90,31 L86,39 M90,31 L94,39" stroke="currentColor" stroke-width="1" fill="none"/>
+          <text x="15" y="102" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--mute)">HOMO</text>
+          <text x="15" y="18" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--mute)">LUMO</text>
+          <text x="97" y="60" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--mute)">gap</text>
+        </svg>
+        <figcaption style="font-size:11px; color:var(--mute); text-align:center; margin-top:4px;">HOMO&ndash;LUMO gap</figcaption>
+      </figure>
+      <div style="flex:1 1 260px; min-width:220px;">
+        <div class="eyebrow" style="margin-bottom:8px;"><span>Electronic structure &rarr; function</span></div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.7; margin:0;">
+          In the <em>J. Mol. Struct.</em> paper above, we computed how a small HOMO&ndash;LUMO gap and high hyperpolarizability in an organic salt translate into a strong third-order nonlinear optical response &mdash; the same kind of electronic-structure&rarr;function link that shows up in catalyst design and drug-target binding.
+        </p>
+      </div>
     </div>
   </div>
 
@@ -440,7 +502,7 @@
 
     <div style="margin-top:40px; max-width:760px;">
 
-      <div class="timeline-item">
+      <div class="timeline-item reveal" style="transition-delay:0ms;">
         <div class="timeline-dot"></div>
         <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
           <h3 style="font-size:17px;">PhD Researcher &mdash; Computational Chemistry</h3>
@@ -450,11 +512,12 @@
         <ul style="margin:14px 0 0; padding-left:18px; color:var(--dim); font-size:14.5px; line-height:1.75;">
           <li>Elucidating the catalytic mechanism of EarP, a bacterial enzyme with no human counterpart that modifies elongation factor EF-P &mdash; a modification linked to virulence and antibiotic resistance in pathogens such as <em>Pseudomonas aeruginosa</em>, and studied here as a potential selective antibacterial target. Used QM/MM, molecular dynamics and metadynamics, cross-validated against experimental mutagenesis data.</li>
           <li>Developed the Penetration Index, a geometrical bonding descriptor correlating with independently computed covalency descriptors &mdash; a cheaper proxy for bonding character than the energy-decomposition methods it was validated against; published in Dalton Transactions.</li>
-          <li>Replaced ad-hoc analysis scripts with reusable, tested Python packages and automated workflows for multiscale simulations on Linux/HPC infrastructure.</li>
+          <li>Investigated organic and inorganic reaction mechanisms and catalytic systems with DFT and QM/MM as part of multidisciplinary, international collaborations &mdash; including relating a molecule's electronic structure (HOMO&ndash;LUMO gap, hyperpolarizability) to its physical function, from catalytic activity to the nonlinear optical response of a laser-protection material.</li>
+          <li>Replaced ad-hoc analysis scripts with reusable Python packages and automated workflows for multiscale simulations on Linux/HPC infrastructure.</li>
         </ul>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item reveal" style="transition-delay:80ms;">
         <div class="timeline-dot"></div>
         <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
           <h3 style="font-size:17px;">Erasmus Mundus MSc Researcher</h3>
@@ -468,13 +531,16 @@
         </ul>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item reveal" style="transition-delay:160ms;">
         <div class="timeline-dot"></div>
         <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
           <h3 style="font-size:17px;">BSc in Chemistry</h3>
           <span class="mono" style="font-size:12.5px; color:var(--mute); white-space:nowrap;">2017 &ndash; 2021</span>
         </div>
         <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:4px;">Universidad de Zaragoza</div>
+        <ul style="margin:14px 0 0; padding-left:18px; color:var(--dim); font-size:14.5px; line-height:1.75;">
+          <li>Thesis: DFT study of manganese-catalyzed, acceptorless alcohol dehydrogenation &mdash; a waste-free route (H&#8322; as the sole byproduct, earth-abundant metal catalyst) to amide/imine precursors used in pharmaceuticals and dyes.</li>
+        </ul>
       </div>
 
     </div>
@@ -482,18 +548,18 @@
 
   <!-- CONTACT / FOOTER -->
   <div id="contact" class="section" style="text-align:center; padding-top:80px;">
-    <div class="eyebrow" style="justify-content:center;"><span class="num">06</span><span>&mdash; Contact</span></div>
-    <h2 style="font-size:clamp(30px,4vw,46px); font-weight:700; margin-top:16px;">Let's talk.</h2>
-    <p style="color:var(--dim); font-size:16.5px; max-width:520px; margin:16px auto 0; line-height:1.7;">
-      Open to industry roles in computational chemistry, molecular modelling and applied ML. If any of the above is a fit, I'd like to hear from you.
+    <div class="eyebrow reveal" style="justify-content:center;"><span class="num">06</span><span>&mdash; Contact</span></div>
+    <h2 class="reveal" style="font-size:clamp(30px,4vw,46px); font-weight:700; margin-top:16px; transition-delay:60ms;">Let's talk.</h2>
+    <p class="reveal" style="color:var(--dim); font-size:16.5px; max-width:520px; margin:16px auto 0; line-height:1.7; transition-delay:120ms;">
+      Open to industry roles in computational chemistry and molecular modelling, with a growing interest in applied ML, quantum computing and corporate R&amp;D&amp;I. If any of the above is a fit, I'd like to hear from you.
     </p>
-    <div style="margin-top:32px;">
+    <div class="reveal" style="margin-top:32px; transition-delay:180ms;">
       <a class="btn btn-primary" href="mailto:jorgepardosblasco@gmail.com" style="font-size:15px; padding:15px 26px;">
         jorgepardosblasco@gmail.com
       </a>
     </div>
 
-    <div style="display:flex; gap:12px; justify-content:center; margin-top:28px;">
+    <div class="reveal" style="display:flex; gap:12px; justify-content:center; margin-top:28px; transition-delay:220ms;">
       <a class="footer-icon" href="https://www.linkedin.com/in/jorge-pardos-blasco-253a6a20b" target="_blank" rel="noopener" aria-label="LinkedIn">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 11v5M8 8v.01M12 16v-5M12 16v-3a2 2 0 0 1 4 0v3"/></svg>
       </a>
@@ -510,5 +576,30 @@
   </div>
 
 </div>
+
+<script>
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || typeof IntersectionObserver === 'undefined') {
+    els.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
 </body>
 </html>
