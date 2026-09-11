@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jorge Pardos Blasco — Computational Chemist</title>
-  <meta name="description" content="Portfolio of Jorge Pardos Blasco, computational chemistry PhD candidate — molecular simulation, QM/MM, and personal software projects.">
+  <title>Jorge Pardos Blasco &middot; Computational Chemist</title>
+  <meta name="description" content="Portfolio of Jorge Pardos Blasco, computational chemistry PhD candidate: molecular simulation, QM/MM, and personal software projects.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <style>
     :root{
@@ -163,6 +163,37 @@
       gap:20px;
     }
 
+    .proj-scroll-wrap{position:relative;}
+    .proj-scroll{
+      display:flex;
+      gap:20px;
+      overflow-x:auto;
+      scroll-snap-type:x proximity;
+      padding:4px 2px 16px;
+      scrollbar-width:thin;
+      scrollbar-color:var(--border) transparent;
+      -webkit-mask-image:linear-gradient(to right, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+      mask-image:linear-gradient(to right, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+    }
+    .proj-scroll::-webkit-scrollbar{height:6px;}
+    .proj-scroll::-webkit-scrollbar-track{background:transparent;}
+    .proj-scroll::-webkit-scrollbar-thumb{background:var(--border); border-radius:3px;}
+    .proj-scroll::-webkit-scrollbar-thumb:hover{background:var(--accent-line);}
+    .proj-scroll > .card{flex:0 0 clamp(280px, 82vw, 340px); scroll-snap-align:start;}
+    .proj-scroll-btn{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:38px; height:38px; border-radius:50%; flex:none;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--bg); border:1px solid var(--border-soft); color:var(--text);
+      cursor:pointer; z-index:2;
+      box-shadow:0 10px 24px oklch(0.1 0.01 250 / 0.4);
+      transition:border-color .2s ease, transform .15s ease, opacity .2s ease;
+    }
+    .proj-scroll-btn:hover{border-color:var(--accent-line); transform:translateY(-50%) scale(1.06);}
+    .proj-scroll-btn-left{left:-8px;}
+    .proj-scroll-btn-right{right:-8px;}
+    @media (hover:none), (max-width:680px){.proj-scroll-btn{display:none;}}
+
     .footer-icon{
       width:40px; height:40px; border-radius:9px;
       display:flex; align-items:center; justify-content:center;
@@ -206,7 +237,7 @@
       </div>
       <h1 style="font-size:clamp(38px, 6vw, 68px); font-weight:700; line-height:1.04; max-width:880px;">Jorge Pardos&nbsp;Blasco</h1>
       <p style="font-family:'Space Grotesk', sans-serif; font-weight:500; font-size:clamp(17px, 2.1vw, 22px); color:var(--dim); max-width:640px; margin:20px 0 0; line-height:1.45;">
-        PhD candidate in computational chemistry, using quantum mechanics and molecular simulation to understand how enzymes and catalysts work &mdash; and picking up Python along the way to make sense of the results.
+        PhD candidate in computational chemistry, using quantum mechanics and molecular simulation to understand how enzymes and catalysts work, picking up Python along the way to make sense of the results.
       </p>
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:34px;">
         <a class="btn btn-primary" href="mailto:jorgepardosblasco@gmail.com">
@@ -228,16 +259,16 @@
   <!-- ABOUT -->
   <div id="about" class="section" style="position:relative;">
 
-    <div class="eyebrow"><span class="num">01</span><span>&mdash; About</span></div>
+    <div class="eyebrow"><span class="num">01</span><span>&middot; About</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Chemistry first, code as a tool.</h2>
 
     <div style="display:flex; gap:56px; margin-top:40px; flex-wrap:wrap;">
       <div style="flex:1 1 420px; min-width:280px;">
         <p class="reveal" style="font-size:17px; line-height:1.75; color:var(--dim); margin:0;">
-          I'm a computational chemist in the final stretch of a PhD in Zaragoza, where my main work is running QM/MM, molecular dynamics and metadynamics simulations to understand how enzymes and catalysts actually work &mdash; and to connect a molecule's electronic structure to what it actually does, from catalytic activity to optical response. Python is the tool I reach for to get there &mdash; turning weeks of simulation output into a clear answer.
+          I'm a computational chemist in the final stretch of a PhD in Zaragoza, where my main work is running QM/MM, molecular dynamics and metadynamics simulations to understand how enzymes and catalysts actually work, and to connect a molecule's electronic structure to what it actually does, from catalytic activity to optical response. Python is the tool I reach for to get there, turning weeks of simulation output into a clear answer.
         </p>
         <p class="reveal" style="font-size:17px; line-height:1.75; color:var(--dim); margin:20px 0 0;">
-          Alongside that, I like putting together small, organized tools for my own research &mdash; the kind with clear documentation and a README, not just a one-off script. That habit has grown into a handful of personal projects at the intersection of molecular simulation and cheminformatics &mdash; a few of which are below.
+          Alongside that, I like putting together small, organized tools for my own research: the kind with clear documentation and a README, not just a one-off script. That habit has grown into a handful of personal projects at the intersection of molecular simulation and cheminformatics, a few of which are below.
         </p>
 
         <figure class="reveal" style="margin:26px 0 0; padding:20px 22px; background:var(--elev); border:1px solid var(--border-soft); border-radius:14px;">
@@ -268,7 +299,7 @@
             <text x="95" y="47" font-family="IBM Plex Mono, monospace" font-size="11" fill="oklch(0.78 0.125 189)">QM core</text>
             <text x="176" y="161" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)" opacity="0.8">MM environment</text>
           </svg>
-          <figcaption style="font-size:13px; color:var(--mute); margin-top:10px; line-height:1.6;">A quantum-mechanical core &mdash; the atoms directly involved in bond-breaking &mdash; embedded in a classical molecular-mechanics environment: the QM/MM approach I use to simulate enzymes and catalysts too large to treat fully at the quantum level.</figcaption>
+          <figcaption style="font-size:13px; color:var(--mute); margin-top:10px; line-height:1.6;">A quantum-mechanical core (the atoms directly involved in bond-breaking) embedded in a classical molecular-mechanics environment: the QM/MM approach I use to simulate enzymes and catalysts too large to treat fully at the quantum level.</figcaption>
         </figure>
 
         <div class="eyebrow" style="color:var(--dim); margin:28px 0 16px;"><span>Where I'm headed</span></div>
@@ -283,7 +314,7 @@
           </div>
           <div class="hobby-chip">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.78 0.125 189)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c2.5 3 3.8 6 3.8 9a3.8 3.8 0 1 1-7.6 0c0-3 1.3-6 3.8-9Z"/><path d="M9 17.5c-2.5 1-4 2.5-4 4M15 17.5c2.5 1 4 2.5 4 4"/></svg>
-            <span style="font-size:14px;">Industrial R&amp;D &mdash; research that ships as a product</span>
+            <span style="font-size:14px;">Industrial R&amp;D: research that ships as a product</span>
           </div>
         </div>
 
@@ -335,7 +366,7 @@
 
   <!-- SKILLS -->
   <div id="skills" class="section section-tight">
-    <div class="eyebrow"><span class="num">02</span><span>&mdash; Skills</span></div>
+    <div class="eyebrow"><span class="num">02</span><span>&middot; Skills</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Technical skills</h2>
 
     <div class="grid-auto" style="margin-top:36px;">
@@ -362,13 +393,17 @@
 
   <!-- PROJECTS -->
   <div id="projects" class="section section-tight">
-    <div class="eyebrow"><span class="num">03</span><span>&mdash; Projects</span></div>
+    <div class="eyebrow"><span class="num">03</span><span>&middot; Projects</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Things I've built</h2>
-    <p style="color:var(--mute); font-size:15px; margin-top:12px; max-width:620px;">Personal Python side-projects that grew out of my own research &mdash; small in scope, but documented well enough that someone else could actually run them.</p>
+    <p style="color:var(--mute); font-size:15px; margin-top:12px; max-width:620px;">Personal Python side-projects that grew out of my own research: small in scope, but documented well enough that someone else could actually run them.</p>
 
-    <div class="grid-auto-2" style="margin-top:36px;">
+    <div class="proj-scroll-wrap reveal" style="margin-top:36px;">
+      <button type="button" class="proj-scroll-btn proj-scroll-btn-left" aria-label="Scroll projects left">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+      </button>
+      <div class="proj-scroll" id="projScroll">
 
-      <div class="card reveal">
+      <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <div style="display:flex; align-items:center; gap:10px;">
             <svg width="34" height="20" viewBox="0 0 60 34" role="img" aria-label="Two atoms connected by a measured interatomic distance" style="color:var(--mute); flex:none;">
@@ -385,38 +420,38 @@
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
           Interaction analyzer implementing the <em>Penetration Index</em>, a purely geometrical bonding descriptor I co-developed and published in <em>Dalton Transactions</em> (2026). Detects and classifies covalent, hydrogen-bond, van der Waals and metallophilic contacts across structures and MD trajectories.
         </p>
-        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">A single distance stands in for energy-decomposition analyses too expensive to run at scale &mdash; useful for screening bonding character across many structures at once.</p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">A single distance stands in for energy-decomposition analyses too expensive to run at scale, useful for screening bonding character across many structures at once.</p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
           <span class="proj-tag">Python</span><span class="proj-tag">MDAnalysis</span><span class="proj-tag">PyMOL</span>
         </div>
       </div>
 
-      <div class="card reveal" style="transition-delay:60ms;">
+      <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <h3 style="font-size:19px;">md-interactions</h3>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
           Pip-installable CLI that reproducibly analyzes enzyme&ndash;substrate MD trajectories: catalytic distances/angles, hydrogen bonds, RMSD/RMSF, free-energy maps and clustering. Validates the full configuration against the topology before running a single frame, then outputs publication-ready figures and a report.
         </p>
-        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Built to replace the one-off scripts a lab reruns by hand each time &mdash; something a colleague, not just its author, can actually pick up and run.</p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Built to replace the one-off scripts a lab reruns by hand each time: something a colleague, not just its author, can actually pick up and run.</p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
           <span class="proj-tag">Python</span><span class="proj-tag">CLI</span><span class="proj-tag">Matplotlib</span>
         </div>
       </div>
 
-      <div class="card reveal" style="transition-delay:120ms;">
+      <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <h3 style="font-size:19px;">Molecule2input</h3>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
-          End-to-end pipeline from a hand-drawn or ChemDraw-style molecule image to a ready-to-run Gaussian/ORCA input file. Wraps an existing image-to-structure recognition model (DECIMER, MolScribe) as the front end, then applies deterministic, RDKit-based logic &mdash; stereochemistry, charge/spin assignment, 3D embedding &mdash; plus a human verification step at the one point the pipeline is uncertain.
+          End-to-end pipeline from a hand-drawn or ChemDraw-style molecule image to a ready-to-run Gaussian/ORCA input file. Wraps an existing image-to-structure recognition model (DECIMER, MolScribe) as the front end, then applies deterministic, RDKit-based logic (stereochemistry, charge/spin assignment, 3D embedding) plus a human verification step at the one point the pipeline is uncertain.
         </p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
           <span class="proj-tag">Python</span><span class="proj-tag">RDKit</span><span class="proj-tag">CLI</span>
         </div>
       </div>
 
-      <div class="card reveal" style="transition-delay:180ms;">
+      <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <h3 style="font-size:19px;">frame_extractor</h3>
         </div>
@@ -428,12 +463,16 @@
         </div>
       </div>
 
+      </div>
+      <button type="button" class="proj-scroll-btn proj-scroll-btn-right" aria-label="Scroll projects right">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
     </div>
   </div>
 
   <!-- PUBLICATIONS -->
   <div id="publications" class="section section-tight">
-    <div class="eyebrow"><span class="num">04</span><span>&mdash; Publications</span></div>
+    <div class="eyebrow"><span class="num">04</span><span>&middot; Publications</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Publications</h2>
 
     <div class="reveal" style="margin-top:28px;">
@@ -505,7 +544,7 @@
       <div style="flex:1 1 260px; min-width:220px;">
         <div class="eyebrow" style="margin-bottom:8px;"><span>Electronic structure &rarr; function</span></div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.7; margin:0;">
-          In the <em>J. Mol. Struct.</em> paper above, we computed how a small HOMO&ndash;LUMO gap and high hyperpolarizability in an organic salt translate into a strong third-order nonlinear optical response &mdash; the same kind of electronic-structure&rarr;function link that shows up in catalyst design and drug-target binding.
+          In the <em>J. Mol. Struct.</em> paper above, we computed how a small HOMO&ndash;LUMO gap and high hyperpolarizability in an organic salt translate into a strong third-order nonlinear optical response; the same kind of electronic-structure&rarr;function link that shows up in catalyst design and drug-target binding.
         </p>
       </div>
     </div>
@@ -513,7 +552,7 @@
 
   <!-- EXPERIENCE -->
   <div id="experience" class="section section-tight">
-    <div class="eyebrow"><span class="num">05</span><span>&mdash; Experience</span></div>
+    <div class="eyebrow"><span class="num">05</span><span>&middot; Experience</span></div>
     <h2 style="font-size:clamp(28px,3.4vw,40px); font-weight:700; margin-top:14px;">Research experience</h2>
 
     <div style="margin-top:40px; max-width:760px;">
@@ -521,14 +560,14 @@
       <div class="timeline-item reveal" style="transition-delay:0ms;">
         <div class="timeline-dot"></div>
         <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
-          <h3 style="font-size:17px;">PhD Researcher &mdash; Computational Chemistry</h3>
+          <h3 style="font-size:17px;">PhD Researcher, Computational Chemistry</h3>
           <span class="mono" style="font-size:12.5px; color:var(--mute); white-space:nowrap;">2023 &ndash; Present</span>
         </div>
         <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:4px;">Universidad de Zaragoza</div>
         <ul style="margin:14px 0 0; padding-left:18px; color:var(--dim); font-size:14.5px; line-height:1.75;">
-          <li>Elucidating the catalytic mechanism of EarP, a bacterial enzyme with no human counterpart that modifies elongation factor EF-P &mdash; a modification linked to virulence and antibiotic resistance in pathogens such as <em>Pseudomonas aeruginosa</em>, and studied here as a potential selective antibacterial target. Used QM/MM, molecular dynamics and metadynamics, cross-validated against experimental mutagenesis data.</li>
-          <li>Developed the Penetration Index, a geometrical bonding descriptor correlating with independently computed covalency descriptors &mdash; a cheaper proxy for bonding character than the energy-decomposition methods it was validated against; published in Dalton Transactions.</li>
-          <li>Investigated organic and inorganic reaction mechanisms and catalytic systems with DFT and QM/MM as part of multidisciplinary, international collaborations &mdash; including relating a molecule's electronic structure (HOMO&ndash;LUMO gap, hyperpolarizability) to its physical function, from catalytic activity to the nonlinear optical response of a laser-protection material.</li>
+          <li>Elucidating the catalytic mechanism of EarP, a bacterial enzyme with no human counterpart that modifies elongation factor EF-P (a modification linked to virulence and antibiotic resistance in pathogens such as <em>Pseudomonas aeruginosa</em>), studied here as a potential selective antibacterial target. Used QM/MM, molecular dynamics and metadynamics, cross-validated against experimental mutagenesis data.</li>
+          <li>Developed the Penetration Index, a geometrical bonding descriptor correlating with independently computed covalency descriptors (a cheaper proxy for bonding character than the energy-decomposition methods it was validated against); published in Dalton Transactions.</li>
+          <li>Investigated organic and inorganic reaction mechanisms and catalytic systems with DFT and QM/MM as part of multidisciplinary, international collaborations, including relating a molecule's electronic structure (HOMO&ndash;LUMO gap, hyperpolarizability) to its physical function, from catalytic activity to the nonlinear optical response of a laser-protection material.</li>
           <li>Replaced ad-hoc analysis scripts with reusable Python packages and automated workflows for multiscale simulations on Linux/HPC infrastructure.</li>
         </ul>
       </div>
@@ -541,7 +580,7 @@
         </div>
         <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:4px;">Universidad de Valencia / Universidad Aut&oacute;noma de Madrid</div>
         <ul style="margin:14px 0 0; padding-left:18px; color:var(--dim); font-size:14.5px; line-height:1.75;">
-          <li>Master's thesis: resolved a long-standing mechanistic controversy for GTP hydrolysis by RhoA &mdash; a Ras-superfamily GTPase implicated in breast, colon and lung cancers, and an active target for small-molecule inhibitor design &mdash; using QM/MM free-energy calculations.</li>
+          <li>Master's thesis: resolved a long-standing mechanistic controversy for GTP hydrolysis by RhoA (a Ras-superfamily GTPase implicated in breast, colon and lung cancers, and an active target for small-molecule inhibitor design) using QM/MM free-energy calculations.</li>
           <li>Identified glutamine tautomerism as the rate-limiting proton-transfer step, matching the experimental rate constant and reconciling several competing mechanistic proposals from the literature; published in ACS Catalysis.</li>
           <li>Trained in advanced electronic-structure theory, molecular simulation, computational modelling and scientific programming across a competitive, multi-institution European programme (EMTCCM).</li>
         </ul>
@@ -555,8 +594,8 @@
         </div>
         <div class="mono" style="font-size:12.5px; color:var(--mute); margin-top:4px;">Universidad de Zaragoza</div>
         <ul style="margin:14px 0 0; padding-left:18px; color:var(--dim); font-size:14.5px; line-height:1.75;">
-          <li>Thesis: DFT study of manganese-catalyzed, acceptorless alcohol dehydrogenation &mdash; a waste-free route (H&#8322; as the sole byproduct, earth-abundant metal catalyst) to amide/imine precursors used in pharmaceuticals and dyes.</li>
-          <li>Modeled and compared the reaction mechanism across four Mn&ndash;pincer catalysts using DFT (B3LYP/def2-SVP geometries with Grimme dispersion corrections, def2-TZVP single-point energies, PCM solvent model) in Gaussian09, run on the Memento HPC cluster &mdash; isolating how the pincer's bridging atom (CH vs. N) and the phosphine substituents (<sup>t</sup>Bu vs. Me) shift the most probable catalytic pathway.</li>
+          <li>Thesis: DFT study of manganese-catalyzed, acceptorless alcohol dehydrogenation, a waste-free route (H&#8322; as the sole byproduct, earth-abundant metal catalyst) to amide/imine precursors used in pharmaceuticals and dyes.</li>
+          <li>Modeled and compared the reaction mechanism across four Mn&ndash;pincer catalysts using DFT (B3LYP/def2-SVP geometries with Grimme dispersion corrections, def2-TZVP single-point energies, PCM solvent model) in Gaussian09, run on the Memento HPC cluster, isolating how the pincer's bridging atom (CH vs. N) and the phosphine substituents (<sup>t</sup>Bu vs. Me) shift the most probable catalytic pathway.</li>
         </ul>
       </div>
 
@@ -565,7 +604,7 @@
 
   <!-- CONTACT / FOOTER -->
   <div id="contact" class="section" style="text-align:center; padding-top:80px;">
-    <div class="eyebrow reveal" style="justify-content:center;"><span class="num">06</span><span>&mdash; Contact</span></div>
+    <div class="eyebrow reveal" style="justify-content:center;"><span class="num">06</span><span>&middot; Contact</span></div>
     <h2 class="reveal" style="font-size:clamp(30px,4vw,46px); font-weight:700; margin-top:16px; transition-delay:60ms;">Let's talk.</h2>
     <p class="reveal" style="color:var(--dim); font-size:16.5px; max-width:520px; margin:16px auto 0; line-height:1.7; transition-delay:120ms;">
       Open to industry roles in computational chemistry and molecular modelling, with a growing interest in applied ML, quantum computing and corporate R&amp;D&amp;I. If any of the above is a fit, I'd like to hear from you.
@@ -615,6 +654,30 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   els.forEach(function (el) { io.observe(el); });
+})();
+
+(function () {
+  var scroller = document.getElementById('projScroll');
+  if (!scroller) return;
+  var btnLeft = document.querySelector('.proj-scroll-btn-left');
+  var btnRight = document.querySelector('.proj-scroll-btn-right');
+
+  function step() {
+    var card = scroller.querySelector('.card');
+    if (!card) return 320;
+    var gap = parseFloat(getComputedStyle(scroller).columnGap || 20);
+    return card.getBoundingClientRect().width + gap;
+  }
+  function updateButtons() {
+    var max = scroller.scrollWidth - scroller.clientWidth - 1;
+    if (btnLeft) btnLeft.style.opacity = scroller.scrollLeft <= 0 ? '0.35' : '1';
+    if (btnRight) btnRight.style.opacity = scroller.scrollLeft >= max ? '0.35' : '1';
+  }
+  if (btnLeft) btnLeft.addEventListener('click', function () { scroller.scrollBy({ left: -step(), behavior: 'smooth' }); });
+  if (btnRight) btnRight.addEventListener('click', function () { scroller.scrollBy({ left: step(), behavior: 'smooth' }); });
+  scroller.addEventListener('scroll', updateButtons, { passive: true });
+  window.addEventListener('resize', updateButtons);
+  updateButtons();
 })();
 </script>
 
