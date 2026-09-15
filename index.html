@@ -194,6 +194,15 @@
     .proj-scroll-btn-right{right:-8px;}
     @media (hover:none), (max-width:680px){.proj-scroll-btn{display:none;}}
 
+    .card-live{
+      border-color:var(--accent-line);
+      box-shadow:0 0 0 1px var(--accent-soft);
+    }
+    .card-live:hover{
+      border-color:var(--accent);
+      box-shadow:0 0 0 1px var(--accent-soft), 0 16px 32px oklch(0.1 0.01 250 / 0.35);
+    }
+
     .footer-icon{
       width:40px; height:40px; border-radius:9px;
       display:flex; align-items:center; justify-content:center;
@@ -403,6 +412,27 @@
       </button>
       <div class="proj-scroll" id="projScroll">
 
+      <a class="card card-live" href="https://netscape-studies-queensland-fully.trycloudflare.com/" target="_blank" rel="noopener" aria-label="Open the Molecule2input live demo in a new tab" style="display:block; color:inherit; text-decoration:none;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <h3 style="font-size:19px;">Molecule2input</h3>
+          <span class="proj-tag" style="background:var(--accent-soft); color:var(--accent); display:inline-flex; align-items:center; gap:4px;">
+            Live demo
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+          </span>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
+          Turns a photo, a ChemDraw sketch, or a typed structure of a molecule into a ready-to-run input file for quantum chemistry software like Gaussian or ORCA, skipping a fiddly manual setup step every computational chemist knows well.
+        </p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Combines an image-recognition model with a verification step for the one part the pipeline can't be fully sure about, like stereochemistry.</p>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin-top:16px;">
+          <span class="proj-tag">Python</span><span class="proj-tag">RDKit</span><span class="proj-tag">Web app</span>
+          <span class="mono" style="font-size:12px; color:var(--accent); margin-left:auto; display:inline-flex; align-items:center; gap:4px;">
+            Try it live
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+          </span>
+        </div>
+      </a>
+
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <div style="display:flex; align-items:center; gap:10px;">
@@ -418,9 +448,9 @@
           <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">from my own paper</span>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
-          Interaction analyzer implementing the <em>Penetration Index</em>, a purely geometrical bonding descriptor I co-developed and published in <em>Dalton Transactions</em> (2026). Detects and classifies covalent, hydrogen-bond, van der Waals and metallophilic contacts across structures and MD trajectories.
+          Measures how much two atoms overlap in 3D to classify chemical interactions, from hydrogen bonds to metal contacts, across a structure or an entire simulation. Implements a bonding descriptor I co-developed and published in <em>Dalton Transactions</em> (2026).
         </p>
-        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">A single distance stands in for energy-decomposition analyses too expensive to run at scale, useful for screening bonding character across many structures at once.</p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">A single distance stands in for slower, more expensive methods, making it practical to screen bonding across many structures at once.</p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
           <span class="proj-tag">Python</span><span class="proj-tag">MDAnalysis</span><span class="proj-tag">PyMOL</span>
         </div>
@@ -431,23 +461,11 @@
           <h3 style="font-size:19px;">md-interactions</h3>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
-          Pip-installable CLI that reproducibly analyzes enzyme&ndash;substrate MD trajectories: catalytic distances/angles, hydrogen bonds, RMSD/RMSF, free-energy maps and clustering. Validates the full configuration against the topology before running a single frame, then outputs publication-ready figures and a report.
+          Automatically analyzes enzyme&ndash;substrate simulations: distances, hydrogen bonds and stability, producing ready-to-use figures and reports instead of one-off manual scripts.
         </p>
-        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Built to replace the one-off scripts a lab reruns by hand each time: something a colleague, not just its author, can actually pick up and run.</p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Built so a colleague, not just its author, can pick it up and run it.</p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
           <span class="proj-tag">Python</span><span class="proj-tag">CLI</span><span class="proj-tag">Matplotlib</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
-          <h3 style="font-size:19px;">Molecule2input</h3>
-        </div>
-        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
-          End-to-end pipeline from a hand-drawn or ChemDraw-style molecule image to a ready-to-run Gaussian/ORCA input file. Wraps an existing image-to-structure recognition model (DECIMER, MolScribe) as the front end, then applies deterministic, RDKit-based logic (stereochemistry, charge/spin assignment, 3D embedding) plus a human verification step at the one point the pipeline is uncertain.
-        </p>
-        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
-          <span class="proj-tag">Python</span><span class="proj-tag">RDKit</span><span class="proj-tag">CLI</span>
         </div>
       </div>
 
@@ -456,7 +474,7 @@
           <h3 style="font-size:19px;">frame_extractor</h3>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
-          A focused utility that replicates AMBER's <span class="mono">cpptraj</span> frame/trajectory extraction: centers the solute, wraps solvent across periodic boundaries, and exports any frame or range using familiar cpptraj-style indexing.
+          A small utility for pulling specific frames or ranges out of molecular dynamics simulations, replicating a common AMBER workflow so labmates can grab exactly the snapshot they need.
         </p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
           <span class="proj-tag">Python</span><span class="proj-tag">MDAnalysis</span><span class="proj-tag">ParmEd</span>
@@ -469,9 +487,9 @@
           <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">work in progress</span>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
-          Analyzes sugar-ring conformation from PDB structures or MD trajectories (NetCDF, DCD, XTC via mdtraj): Cremer-Pople puckering coordinates (Q, &theta;, &phi;) for six-membered pyranoses, Altona-Sundaralingam pseudorotation (Q, P, &nu;<sub>max</sub>) for five-membered furanoses.
+          Analyzes and visualizes the 3D shape of sugar rings in molecules or simulations, tracking how that shape changes over time or under different conditions.
         </p>
-        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Outputs Mercator maps, polar Stoddart diagrams, conformer timelines and populations, plus free-energy-surface contour maps from PLUMED-style tables; ships as a pip-installable CLI/GUI or a standalone PyInstaller executable.</p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Reads structures and simulation trajectories directly and produces the specialized plots this kind of analysis normally requires by hand.</p>
         <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
           <span class="proj-tag">Python</span><span class="proj-tag">mdtraj</span><span class="proj-tag">Matplotlib</span>
         </div>
