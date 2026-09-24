@@ -463,6 +463,20 @@
 
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <h3 style="font-size:19px;">PI-GNN</h3>
+          <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">builds on PenIndex</span>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
+          Trains a small graph neural network to predict interaction energies between molecules, to test whether the Penetration Index (from PenIndex, above) helps it learn better than raw atomic distances alone.
+        </p>
+        <p style="color:var(--mute); font-size:13px; line-height:1.6; margin:10px 0 0;">Trained on 1,170 DFT reference energies across five interaction types; the physics-informed feature wins clearly, even on interaction types the model never saw during training.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
+          <span class="proj-tag">Python</span><span class="proj-tag">PyTorch</span><span class="proj-tag">GNN</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
           <h3 style="font-size:19px;">md-interactions</h3>
         </div>
         <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">
