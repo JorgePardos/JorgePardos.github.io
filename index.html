@@ -436,19 +436,19 @@
       <div class="card reveal">
         <h3 style="font-size:15px; color:var(--accent);" class="mono">Simulation &amp; Quantum Chemistry</h3>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
-          <span class="chip">DFT</span><span class="chip">QM/MM</span><span class="chip">QM/MM/MD</span><span class="chip">Molecular dynamics</span><span class="chip">Metadynamics</span><span class="chip">ELF analysis</span><span class="chip">Gaussian</span><span class="chip">ORCA</span><span class="chip">Q-Chem</span><span class="chip">AMBER</span><span class="chip">CP2K</span><span class="chip">AlphaFold</span>
+          <span class="chip">DFT</span><span class="chip">QM/MM</span><span class="chip">QM/MM/MD</span><span class="chip">Molecular dynamics</span><span class="chip">Metadynamics</span><span class="chip">ELF analysis</span><span class="chip">Gaussian</span><span class="chip">ORCA</span><span class="chip">Q-Chem</span><span class="chip">AMBER</span><span class="chip">CP2K</span><span class="chip">AlphaFold</span><span class="chip">DMRG / CASSCF</span><span class="chip">Quantum resource estimation</span>
         </div>
       </div>
       <div class="card reveal" style="transition-delay:60ms;">
         <h3 style="font-size:15px; color:var(--accent);" class="mono">Machine Learning &amp; Cheminformatics</h3>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
-          <span class="chip">PyTorch</span><span class="chip">Graph neural networks</span><span class="chip">ROBERT</span><span class="chip">Model validation</span><span class="chip">RDKit</span><span class="chip">ChEMBL</span><span class="chip">PubChem</span><span class="chip">PDB</span><span class="chip">UniProt</span><span class="chip">BindingDB</span>
+          <span class="chip">PyTorch</span><span class="chip">Graph neural networks</span><span class="chip">ROBERT</span><span class="chip">Model validation</span><span class="chip">RDKit</span><span class="chip">ChEMBL</span><span class="chip">Virtual screening</span><span class="chip">AutoDock Vina</span><span class="chip">PubChem</span><span class="chip">PDB</span><span class="chip">UniProt</span><span class="chip">BindingDB</span>
         </div>
       </div>
       <div class="card reveal" style="transition-delay:120ms;">
         <h3 style="font-size:15px; color:var(--accent);" class="mono">AI-Assisted Development</h3>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
-          <span class="chip">Claude Code</span><span class="chip">Antigravity</span><span class="chip">Custom skills &amp; subagents</span><span class="chip">AI code review</span>
+          <span class="chip">Claude Code</span><span class="chip">Antigravity</span><span class="chip">Custom skills &amp; subagents</span><span class="chip">MCP servers</span><span class="chip">Agent evaluation</span><span class="chip">AI code review</span>
         </div>
       </div>
       <div class="card reveal" style="transition-delay:180ms;">
@@ -534,6 +534,66 @@
         <div class="proj-foot">
           <button type="button" class="proj-more" data-dlg="dlg-pignn" aria-haspopup="dialog">Details</button>
           <a class="proj-live muted" href="https://github.com/JorgePardos/pi-gnn-noncovalent" target="_blank" rel="noopener">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card proj-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <svg width="24" height="22" viewBox="0 0 24 22" aria-hidden="true" style="flex:none;">
+              <g fill="none" stroke="var(--mute)" stroke-width="1.3"><path d="M3 18 9 4l5 9 3-5 4 10z"/></g>
+              <circle cx="9" cy="4" r="2.5" fill="oklch(0.78 0.135 55)"/><circle cx="14" cy="13" r="2.5" fill="oklch(0.78 0.125 189)"/><circle cx="17" cy="8" r="2.5" fill="oklch(0.78 0.125 189)"/>
+            </svg>
+            <h3 style="font-size:19px;">ADORA2A audit</h3>
+          </div>
+          <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">case study</span>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">What goes wrong before a virtual screen even starts: choosing the receptor structure, curating bioactivity data and building fair decoys, tested on the adenosine A<sub>2A</sub> receptor.</p>
+        <p class="proj-metric">Structure audit &middot; ChEMBL curation &middot; docking vs ligand-based</p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:14px;"><span class="proj-tag">Python</span><span class="proj-tag">RDKit</span><span class="proj-tag">AutoDock Vina</span><span class="proj-tag">ChEMBL</span></div>
+        <div class="proj-foot">
+          <button type="button" class="proj-more" data-dlg="dlg-adora2a" aria-haspopup="dialog">Details</button>
+          <a class="proj-live muted" href="https://github.com/JorgePardos/ADORA2A" target="_blank" rel="noopener">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+      <div class="card proj-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <svg width="24" height="22" viewBox="0 0 24 22" aria-hidden="true" style="flex:none;">
+              <circle cx="10" cy="10" r="6.5" fill="none" stroke="oklch(0.78 0.125 189)" stroke-width="1.8"/>
+              <line x1="15" y1="15" x2="21" y2="20" stroke="oklch(0.78 0.135 55)" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M7 10.5l2 2 4-4.5" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 style="font-size:19px;">hitlens</h3>
+          </div>
+          <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">MCP server</span>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">Cheminformatics tools for AI agents that return a decision-ready answer, not a raw list, so that an alert is not mistaken for a verdict.</p>
+        <p class="proj-metric">8 tools &middot; 47 tests &middot; 13 decision evals</p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:14px;"><span class="proj-tag">Python</span><span class="proj-tag">MCP</span><span class="proj-tag">RDKit</span><span class="proj-tag">ChEMBL</span></div>
+        <div class="proj-foot">
+          <button type="button" class="proj-more" data-dlg="dlg-hitlens" aria-haspopup="dialog">Details</button>
+          <a class="proj-live muted" href="https://github.com/JorgePardos/hitlens" target="_blank" rel="noopener">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+      <div class="card proj-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <svg width="24" height="22" viewBox="0 0 24 22" aria-hidden="true" style="flex:none;">
+              <circle cx="12" cy="11" r="9" fill="none" stroke="var(--mute)" stroke-width="1.2" stroke-dasharray="2.5 2.5"/>
+              <circle cx="12" cy="11" r="3" fill="oklch(0.78 0.135 55)"/>
+              <circle cx="12" cy="2" r="1.8" fill="oklch(0.78 0.125 189)"/><circle cx="20" cy="15.5" r="1.8" fill="oklch(0.78 0.125 189)"/><circle cx="4" cy="15.5" r="1.8" fill="oklch(0.78 0.125 189)"/>
+            </svg>
+            <h3 style="font-size:19px;">Enzyme2Qubits</h3>
+          </div>
+          <span class="proj-tag" style="background:var(--amber-soft); color:var(--amber);">in progress</span>
+        </div>
+        <p style="color:var(--dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;">Is quantum computing worth it for a real enzymatic reaction? A feasibility study that prices the electronic part of a QM/MM barrier, classically and on a quantum computer.</p>
+        <p class="proj-metric">Active spaces &middot; DMRG &middot; fault-tolerant resource estimates</p>
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:14px;"><span class="proj-tag">Python</span><span class="proj-tag">PySCF</span><span class="proj-tag">DMRG</span><span class="proj-tag">pytket</span></div>
+        <div class="proj-foot">
+          <button type="button" class="proj-more" data-dlg="dlg-e2q" aria-haspopup="dialog">Details</button>
+          <span class="proj-live muted" style="cursor:default;">Private repository</span>
         </div>
       </div>
 
@@ -793,6 +853,53 @@
         <p>Mean absolute error of 3.49 kcal/mol with the index versus 4.01 kcal/mol with distance, with the index-based model better in 69&nbsp;% of the held-out tests.</p>
         <figure class="dlg-fig"><img src="img/pignn_mae_by_family.png" alt="" loading="lazy"><figcaption>Held-out test error by interaction family: distance only (grey) versus the Penetration Index only (blue).</figcaption></figure>
         <div class="dlg-links"><a class="btn btn-primary" href="https://github.com/JorgePardos/pi-gnn-noncovalent" target="_blank" rel="noopener">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></div>
+  </div>
+</dialog>
+<dialog class="proj-dlg" id="dlg-adora2a" aria-labelledby="dlg-adora2a-t">
+  <div class="dlg-head">
+    <h3 id="dlg-adora2a-t" style="font-size:22px;">ADORA2A audit</h3>
+    <button type="button" class="dlg-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="dlg-body">
+        <h4>The problem</h4>
+        <p>Virtual screens often fail later because of choices made at the start: docking into a receptor conformation or construct that does not suit the question, pooling bioactivity measurements that are not comparable, testing against decoys that are easy to tell apart by size and polarity alone, and judging success with metrics that hide poor early enrichment.</p>
+        <h4>What I did</h4>
+        <p>Used the human adenosine A<sub>2</sub><sub>A</sub> receptor as a worked case and audited each step: every A<sub>2A</sub> structure in the PDB (state, construct, mutations in the pocket, sodium ion, ordered waters), ChEMBL bioactivity curation that keeps assay provenance, property-matched decoys with a leakage test, and a retrospective benchmark that compares simple similarity, 3D shape and AutoDock Vina docking into dry and crystallographically hydrated receptors.</p>
+        <h4>What came out</h4>
+        <ul><li>Most structures use a thermostabilised construct with mutations inside the binding pocket, including the highest-resolution ones, so &ldquo;best resolution&rdquo; is a poor selection rule.</li><li>Keeping the ordered waters fixes cognate redocking, but does not make docking competitive: plain 2D similarity to a known ligand recovered far more actives early.</li><li>Docking scores did not track experimental affinity, and a blind PAINS filter would have removed clinical-stage antagonists.</li></ul>
+        <h4>How it is built</h4>
+        <p>Python package with a deterministic command-line pipeline, an executed notebook, written reports, unit tests and linting. Bootstrap confidence intervals and early-enrichment metrics (EF, BEDROC) are implemented from scratch and tested.</p>
+        <figure class="dlg-fig"><img src="img/adora2a_enrichment.png" alt="" loading="lazy"><figcaption>Same screen, two views: global ROC curves (left) rank methods close together, while early enrichment (right) separates them clearly.</figcaption></figure>
+        <div class="dlg-links"><a class="btn btn-primary" href="https://github.com/JorgePardos/ADORA2A" target="_blank" rel="noopener">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></div>
+  </div>
+</dialog>
+<dialog class="proj-dlg" id="dlg-hitlens" aria-labelledby="dlg-hitlens-t">
+  <div class="dlg-head">
+    <h3 id="dlg-hitlens-t" style="font-size:22px;">hitlens</h3>
+    <button type="button" class="dlg-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="dlg-body">
+        <h4>The problem</h4>
+        <p>There are dozens of chemistry servers for AI agents (MCP), but most simply wrap an API into many thin tools, so the agent has to chain calls and stitch the answer together. Worse, a substructure alert becomes a verdict: an agent that sees &ldquo;PAINS&rdquo; discards the compound, even though aspirin and paracetamol also trigger filters.</p>
+        <h4>What it does</h4>
+        <p>Eight tools shaped around medicinal-chemistry questions instead of around APIs. One call profiles a molecule (normalised structure, properties, rules, interpreted alerts); others triage a list of hits, find analogues, pick a diverse subset, explain what an alert actually measures, and pull bioactivity from ChEMBL and PubChem. Every alert says what it measures, where it comes from and what would confirm it; every external datum carries its source identifier.</p>
+        <h4>How it is built</h4>
+        <ul><li>Structures are normalised first, so a salt and its free acid count as one compound.</li><li>Pure chemistry layer, independent of MCP, so it is testable offline; network calls are cached and fail honestly instead of being filled in from memory.</li><li>47 unit and integration tests (through a real MCP client) and CI on GitHub Actions.</li><li>An <span class="mono">evals/</span> suite of 13 decision scenarios checks that the output leads an agent to the right decision, not just that the code runs. The founding case is not discarding aspirin.</li></ul>
+        <div class="dlg-links"><a class="btn btn-primary" href="https://github.com/JorgePardos/hitlens" target="_blank" rel="noopener">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></div>
+  </div>
+</dialog>
+<dialog class="proj-dlg" id="dlg-e2q" aria-labelledby="dlg-e2q-t">
+  <div class="dlg-head">
+    <h3 id="dlg-e2q-t" style="font-size:22px;">Enzyme2Qubits</h3>
+    <button type="button" class="dlg-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="dlg-body">
+        <h4>The question</h4>
+        <p>How much does it cost, classically and on a quantum computer, to compute the electronic part of an enzymatic reaction barrier (and of the selectivity between two competing pathways) to chemical accuracy? Is that the error that dominates, and what can already be run today?</p>
+        <h4>Approach</h4>
+        <p>Starting from free-energy QM/MM reaction paths of a glycosyltransferase with two competing pathways, the project extracts cluster models of reactant, transition state and product, selects active spaces automatically, computes classical references (CASSCF, NEVPT2, DMRG) and their cost, builds the active-space Hamiltonian and its factorisations, and estimates fault-tolerant resources for phase estimation. A minimal fragment is then run on a quantum emulator.</p>
+        <h4>Status</h4>
+        <p>In development. The cluster extraction, QM/MM-embedded energies and geometry relaxation are in place, and the classical active-space and DMRG references are under way. The enzyme system comes from an unpublished study, so the repository is private and no mechanistic results are shown here.</p>
   </div>
 </dialog>
 
